@@ -28,8 +28,9 @@ def greet_user(bot, update):
     update.message.reply_text(text)
 
 def planet_user(bot, update):
-    update.message.reply_text('введите название планеты на английском: ')
-    user_planet = update.message.text
+    update.message.reply_text('Введите /planet и название планеты на английском: ')
+    user_message = update.message.text.split( )[1]
+    user_planet = user_message.lower()
     if user_planet in dict_planet:
         user_planet = dict_planet[user_planet]
         text_user_planet = ephem.constellation(user_planet)
