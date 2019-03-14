@@ -14,6 +14,7 @@ dict_planet = {
     'mercury': ephem.Mercury(now),
     'venus': ephem.Venus(now),
     'mars': ephem.Mars(now),
+    'pluto': ephem.Pluto(now),
     'jupiter': ephem.Jupiter(now),
     'saturn': ephem.Saturn(now),
     'uranus': ephem.Uranus(now),
@@ -23,14 +24,12 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO, filename='bot.log')
 
 def greet_user(bot, update):
-    text = 'Вызван /start'
+    text = 'Введите /planet и название планеты на английском: '
     print(text)
     update.message.reply_text(text)
 
 def planet_user(bot, update):
-    update.message.reply_text('Введите /planet и название планеты на английском: ')
-    user_message = update.message.text.split( )[1]
-    user_planet = user_message.lower()
+    user_planet = update.message.text.split( )[1].lower()
     if user_planet in dict_planet:
         user_planet = dict_planet[user_planet]
         text_user_planet = ephem.constellation(user_planet)
